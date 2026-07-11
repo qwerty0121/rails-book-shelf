@@ -1,0 +1,39 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - bundle_cache:/usr/local/bundle
+      - claude_code_config:/home/vscode/.claude
+      - gh_config:/home/vscode/.config/gh
+      - type: volume
+        source: claude_code_config
+        target: /home/vscode/.claude.json
+        volume:
+          subpath: claude.json
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/rails_book_shelf_development
+      - RAILS_ENV=development
+    depends_on:
+      - db
+    command: sleep infinity
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: rails_book_shelf_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  bundle_cache:
+  postgres_data:
+  claude_code_config:
+  gh_config:
