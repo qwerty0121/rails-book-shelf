@@ -80,7 +80,7 @@
 devcontainer起動時（`postCreateCommand`）に `bundle install` と `rails db:prepare` が自動実行されるため、追加のセットアップは不要です。
 
 ```bash
-rails server
+bin/rails server -b 0.0.0.0
 ```
 
 ## 学習メモ
