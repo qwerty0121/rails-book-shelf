@@ -7,8 +7,10 @@ cd /workspaces/rails-book-shelf
 sudo chown -R vscode:vscode /home/vscode/.config/gh
 
 # Bundle install if Gemfile exists
+# --jobs=1: parallel installation of native extension gems has been observed
+# to race and fail intermittently in this container, so install serially.
 if [ -f Gemfile ]; then
-  bundle install
+  bundle install --jobs=1
 fi
 
 # DB setup if Rails app exists

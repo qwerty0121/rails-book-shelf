@@ -22,7 +22,10 @@
       "settings": {
         "terminal.integrated.defaultProfile.linux": "zsh",
         "editor.formatOnSave": true,
-        "ruby.rubocop.useBundlerCmd": true
+        "ruby.rubocop.useBundlerCmd": true,
+        "rubyLsp.rubyVersionManager": {
+          "identifier": "none"
+        }
       }
     }
   },
