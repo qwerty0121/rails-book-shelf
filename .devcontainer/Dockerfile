@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/ruby:3.3
+FROM mcr.microsoft.com/devcontainers/ruby:3.4
 
 # System packages + Node.js (for Claude Code)
 RUN apt-get update && apt-get install -y \
@@ -14,8 +14,5 @@ RUN apt-get update && apt-get install -y \
 
 # Claude Code
 RUN npm install -g @anthropic-ai/claude-code
-
-# Rails and common gems
-RUN gem install rails bundler
 
 USER vscode
