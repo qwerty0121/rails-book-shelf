@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd /workspace
+cd /workspaces/rails-book-shelf
 
 # Named volumes can be created root-owned on first mount; fix so vscode can write to them
 sudo chown -R vscode:vscode /home/vscode/.config/gh
