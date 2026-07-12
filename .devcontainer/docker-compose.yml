@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspace:cached
+      - ..:/workspaces/rails-book-shelf:cached
       - bundle_cache:/usr/local/bundle
       - claude_code_config:/home/vscode/.claude
       - gh_config:/home/vscode/.config/gh
