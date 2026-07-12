@@ -19,8 +19,10 @@ services:
       - CAPYBARA_SERVER_PORT=45678
       - SELENIUM_HOST=selenium
     depends_on:
-      - db
-      - selenium
+      db:
+        condition: service_started
+      selenium:
+        condition: service_healthy
     command: sleep infinity
 
   db:
@@ -38,6 +40,13 @@ services:
   selenium:
     image: selenium/standalone-chromium
     restart: unless-stopped
+    shm_size: 2gb
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:4444/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 volumes:
   bundle_cache:
