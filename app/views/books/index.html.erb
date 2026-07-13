@@ -1,0 +1,151 @@
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --text: #2b2a27;
+    --text-muted: #8a877f;
+    --unread: #b26a2f;
+    --unread-bg: #f6ecdf;
+    --read: #3a7d5a;
+    --read-bg: #e5f0ea;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .count {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  thead th {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    padding: 0.75rem 1rem;
+    background: #fbfaf8;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: #fbfaf8;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .author {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .status {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .status--unread {
+    color: var(--unread);
+    background: var(--unread-bg);
+  }
+
+  .status--read {
+    color: var(--read);
+    background: var(--read-bg);
+  }
+
+  .col-status {
+    width: 7rem;
+  }
+
+  @media (max-width: 520px) {
+    .author { display: block; }
+    thead th:nth-child(2),
+    tbody td:nth-child(2) { display: none; }
+  }
+</style>
+<header>
+  <h1>蔵書一覧</h1>
+  <p class="count">
+    全 <%= @book_count %> 冊
+  </p>
+</header>
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>著者名</th>
+      <th class="col-status">読了状態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+    <tr>
+      <td class="title">
+        <%= book.title %>
+      </td>
+      <td class="author">
+        <%= book.author_name %>
+      </td>
+      <td class="col-status">
+        <span class="status <%= book.read? ? 'status--read' : 'status--unread' %>">
+          <%= book.read? ? '読了済' : '未読' %>
+        </span>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
