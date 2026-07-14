@@ -31,12 +31,40 @@
   }
 
   header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.5rem;
   }
 
   h1 {
     font-size: 1.5rem;
     font-weight: 700;
+  }
+
+  .btn-new {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--read);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .btn-new:hover {
+    background: #326b4d;
+  }
+
+  .btn-new:focus-visible {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
   }
 
   .count {
@@ -126,35 +154,40 @@
     tbody td:nth-child(2) { display: none; }
   }
 </style>
-<header>
-  <h1>蔵書一覧</h1>
-  <p class="count">
-    全 <%= @book_count %> 冊
-  </p>
-</header>
-<table>
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>著者名</th>
-      <th class="col-status">読了状態</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-    <tr>
-      <td class="title">
-        <%= link_to book.title, book_path(book) %>
-      </td>
-      <td class="author">
-        <%= book.author_name %>
-      </td>
-      <td class="col-status">
-        <span class="status <%= book.read? ? 'status--read' : 'status--unread' %>">
-          <%= book.read? ? '読了済' : '未読' %>
-        </span>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <header>
+    <div>
+      <h1>蔵書一覧</h1>
+      <p class="count">
+        全 <%= @book_count %> 冊
+      </p>
+    </div>
+    <%= link_to "＋ 新規登録", new_book_path, class: "btn-new" %>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>著者名</th>
+        <th class="col-status">読了状態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td class="title">
+          <%= link_to book.title, book_path(book) %>
+        </td>
+        <td class="author">
+          <%= book.author_name %>
+        </td>
+        <td class="col-status">
+          <span class="status <%= book.read? ? 'status--read' : 'status--unread' %>">
+            <%= book.read? ? '読了済' : '未読' %>
+          </span>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
