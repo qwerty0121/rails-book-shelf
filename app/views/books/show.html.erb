@@ -1,0 +1,146 @@
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --text: #2b2a27;
+    --text-muted: #8a877f;
+    --unread: #b26a2f;
+    --unread-bg: #f6ecdf;
+    --read: #3a7d5a;
+    --read-bg: #e5f0ea;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .back:hover {
+    color: var(--text);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card__head {
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    background: #fbfaf8;
+  }
+
+  .card__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .card__author {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .card__body {
+    padding: 0.5rem 1.75rem 1.5rem;
+  }
+
+  .field {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field:last-child {
+    border-bottom: none;
+  }
+
+  .field__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .field__value {
+    font-size: 1rem;
+  }
+
+  .memo {
+    white-space: pre-wrap;
+  }
+
+  .memo--empty {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .status {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  .status--unread {
+    color: var(--unread);
+    background: var(--unread-bg);
+  }
+
+  .status--read {
+    color: var(--read);
+    background: var(--read-bg);
+  }
+</style>
+
+<div class="container">
+  <%= link_to "← 一覧に戻る", books_path, class: "back" %>
+
+  <article class="card">
+    <div class="card__head">
+      <h1 class="card__title"><%= @book.title %></h1>
+      <p class="card__author"><%= @book.author_name %></p>
+    </div>
+
+    <div class="card__body">
+      <div class="field">
+        <p class="field__label">読了状態</p>
+        <p class="field__value">
+          <span class="status <%= @book.read? ? 'status--read' : 'status--unread' %>"><%= @book.read? ? '読了済' : '未読' %></span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="field__label">メモ</p>
+        <p class="field__value memo"><%= @book.memo %></p>
+      </div>
+    </div>
+  </article>
+</div>

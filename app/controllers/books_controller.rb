@@ -3,4 +3,8 @@ class BooksController < ApplicationController
     @books = Book.all()
     @book_count = @books.length
   end
+
+  def show
+    @book = Book.find_by_id(params[:id])
+  end
 end
