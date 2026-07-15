@@ -34,8 +34,6 @@ services:
       POSTGRES_DB: rails_book_shelf_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   selenium:
     image: selenium/standalone-chromium
