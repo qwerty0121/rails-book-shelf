@@ -91,6 +91,8 @@
 
   .detail-actions {
     margin-top: 1.25rem;
+    display: flex;
+    gap: 0.75rem;
   }
 
   .btn-edit {
@@ -112,6 +114,31 @@
 
   .btn-edit:focus-visible {
     outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
+
+  .btn-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--danger);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background: var(--danger-bg);
+    border-color: var(--danger);
+  }
+
+  .btn-delete:focus-visible {
+    outline: 2px solid var(--danger);
     outline-offset: 2px;
   }
 </style>
@@ -140,5 +167,12 @@
   </article>
   <div class="detail-actions">
     <%= link_to "編集する", edit_book_path(@book), class: "btn-edit" %>
+    <%= button_to "削除する", book_path(@book), method: :delete,
+          data: {
+            turbo_confirm: "『#{@book.title}』を削除します。この操作は取り消せません。",
+            confirm_title: "蔵書を削除しますか？",
+            confirm_button: "削除する",
+            confirm_variant: "danger"
+          }, class: "btn-delete" %>
   </div>
 </div>
