@@ -1,0 +1,178 @@
+<style>
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .back:hover {
+    color: var(--text);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card__head {
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    background: #fbfaf8;
+  }
+
+  .card__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .card__author {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .card__body {
+    padding: 0.5rem 1.75rem 1.5rem;
+  }
+
+  .field {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field:last-child {
+    border-bottom: none;
+  }
+
+  .field__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .field__value {
+    font-size: 1rem;
+  }
+
+  .memo {
+    white-space: pre-wrap;
+  }
+
+  .memo--empty {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .status {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  .status--unread {
+    color: var(--unread);
+    background: var(--unread-bg);
+  }
+
+  .status--read {
+    color: var(--read);
+    background: var(--read-bg);
+  }
+
+  .detail-actions {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .btn-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--read);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+  }
+
+  .btn-edit:hover {
+    background: #326b4d;
+  }
+
+  .btn-edit:focus-visible {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
+
+  .btn-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--danger);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background: var(--danger-bg);
+    border-color: var(--danger);
+  }
+
+  .btn-delete:focus-visible {
+    outline: 2px solid var(--danger);
+    outline-offset: 2px;
+  }
+</style>
+
+<div class="container">
+  <%= link_to "← 一覧に戻る", books_path, class: "back" %>
+
+  <article class="card">
+    <div class="card__head">
+      <h1 class="card__title"><%= @book.title %></h1>
+      <p class="card__author"><%= @book.author_name %></p>
+    </div>
+
+    <div class="card__body">
+      <div class="field">
+        <p class="field__label">読了状態</p>
+        <p class="field__value">
+          <span class="status <%= @book.read? ? 'status--read' : 'status--unread' %>"><%= @book.read? ? '読了済' : '未読' %></span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="field__label">メモ</p>
+        <p class="field__value memo"><%= @book.memo %></p>
+      </div>
+    </div>
+  </article>
+  <div class="detail-actions">
+    <%= link_to "編集する", edit_book_path(@book), class: "btn-edit" %>
+    <%= button_to "削除する", book_path(@book), method: :delete,
+          data: {
+            turbo_confirm: "『#{@book.title}』を削除します。この操作は取り消せません。",
+            confirm_title: "蔵書を削除しますか？",
+            confirm_button: "削除する",
+            confirm_variant: "danger"
+          }, class: "btn-delete" %>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+<style>
+  fieldset {
+    border: none;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .field {
+    margin-bottom: 1.4rem;
+  }
+
+  .field__label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.45rem;
+  }
+
+  .required {
+    color: var(--danger);
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--text);
+    background: #fbfaf8;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  input[type="text"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--read);
+    background: #fff;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 6rem;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .radio {
+    flex: 1;
+    position: relative;
+  }
+
+  .radio input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .radio span {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .radio input:checked + span {
+    border-color: var(--read);
+    background: var(--read-bg);
+    color: var(--read);
+  }
+
+  .radio input:focus-visible + span {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
+
+  .error {
+    display: none;
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+  }
+
+  .field.has-error input {
+    border-color: var(--danger);
+  }
+
+  .field.has-error .error {
+    display: block;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn {
+    font: inherit;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .btn--primary {
+    background: var(--read);
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: #326b4d;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .btn--ghost:hover {
+    background: #fbfaf8;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
+
+  .toast {
+    display: none;
+    background: var(--read-bg);
+    color: var(--read);
+    border: 1px solid #cfe3d8;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+</style>
+<%= form_with model: book, class: "card", html: { novalidate: true } do |form| %>
+  <div class="field">
+    <%= form.label :title, class: "field__label" do %>
+      タイトル<span class="required">必須</span>
+    <% end %>
+    <%= form.text_field :title, autocomplete: "off", placeholder: "例：リーダブルコード" %>
+    <p class="error">タイトルを入力してください。</p>
+  </div>
+
+  <div class="field">
+    <%= form.label :author_name, class: "field__label" do %>
+      著者名<span class="required">必須</span>
+    <% end %>
+    <%= form.text_field :author_name, autocomplete: "off", placeholder: "例：Dustin Boswell" %>
+    <p class="error">著者名を入力してください。</p>
+  </div>
+
+  <fieldset class="field">
+    <legend class="field__label">読了状態</legend>
+    <div class="radio-group">
+      <%= form.label :read_false, class: "radio" do %>
+        <%= form.radio_button :read, false %>
+        <span>未読</span>
+      <% end %>
+      <%= form.label :read_true, class: "radio" do %>
+        <%= form.radio_button :read, true %>
+        <span>読了済</span>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <%= form.label :memo, "メモ", class: "field__label" %>
+    <%= form.text_area :memo, placeholder: "任意で入力できます" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit submit_label, class: "btn btn--primary" %>
+    <%= link_to "キャンセル", cancel_url, class: "btn btn--ghost" %>
+  </div>
+<% end %>
