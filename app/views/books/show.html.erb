@@ -119,6 +119,32 @@
     color: var(--read);
     background: var(--read-bg);
   }
+
+  .detail-actions {
+    margin-top: 1.25rem;
+  }
+
+  .btn-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--read);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+  }
+
+  .btn-edit:hover {
+    background: #326b4d;
+  }
+
+  .btn-edit:focus-visible {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
 </style>
 
 <div class="container">
@@ -143,4 +169,7 @@
       </div>
     </div>
   </article>
+  <div class="detail-actions">
+    <%= link_to "編集する", edit_book_path(@book), class: "btn-edit" %>
+  </div>
 </div>

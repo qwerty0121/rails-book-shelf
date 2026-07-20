@@ -54,7 +54,7 @@
 </style>
 <div class="container">
   <%= link_to "← 一覧に戻る", books_path, class: "back" %>
-  <h1>蔵書登録</h1>
+  <h1>蔵書編集</h1>
 
-  <%= render "form", book: @book, submit_label: "登録する", cancel_url: books_path %>
+  <%= render "form", book: @book, submit_label: "更新する", cancel_url: book_path(@book) %>
 </div>

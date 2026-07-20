@@ -1,15 +1,19 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: %i[ show edit ]
+
   def index
     @books = Book.all()
     @book_count = @books.length
   end
 
   def show
-    @book = Book.find_by_id(params[:id])
   end
 
   def new
     @book = Book.new
+  end
+
+  def edit
   end
 
   def create
@@ -22,6 +26,9 @@ class BooksController < ApplicationController
   end
 
   private
+    def set_book
+      @book = Book.find_by_id(params[:id])
+    end
 
     def book_params
       params.expect(book: [ :title, :author_name, :read, :memo ])
