@@ -158,7 +158,7 @@
     margin-bottom: 1.25rem;
   }
 </style>
-<%= form_with model: book, method: "POST", class: "card", html: { novalidate: true } do |form| %>
+<%= form_with model: book, class: "card", html: { novalidate: true } do |form| %>
   <div class="field">
     <%= form.label :title, class: "field__label" do %>
       タイトル<span class="required">必須</span>
