@@ -79,13 +79,13 @@
     color: var(--text-muted);
   }
 
-  .radio input:checked + span {
+  .radio:has(input:checked) .radio-label {
     border-color: var(--read);
     background: var(--read-bg);
     color: var(--read);
   }
 
-  .radio input:focus-visible + span {
+  .radio:has(input:focus-visible) .radio-label {
     outline: 2px solid var(--read);
     outline-offset: 2px;
   }
@@ -180,11 +180,11 @@
     <div class="radio-group">
       <%= form.label :read_false, class: "radio" do %>
         <%= form.radio_button :read, false %>
-        <span>未読</span>
+        <span class="radio-label">未読</span>
       <% end %>
       <%= form.label :read_true, class: "radio" do %>
         <%= form.radio_button :read, true %>
-        <span>読了済</span>
+        <span class="radio-label">読了済</span>
       <% end %>
     </div>
   </fieldset>
