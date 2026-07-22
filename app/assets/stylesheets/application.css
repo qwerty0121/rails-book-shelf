@@ -8,3 +8,108 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --border: #e4e2dc;
+  --text: #2b2a27;
+  --text-muted: #8a877f;
+  --unread: #b26a2f;
+  --unread-bg: #f6ecdf;
+  --read: #3a7d5a;
+  --read-bg: #e5f0ea;
+  --danger: #c0392b;
+  --danger-bg: #fbeceb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* 確認モーダル（dialog要素） */
+.confirm-modal {
+  border: none;
+  border-radius: 12px;
+  max-width: 380px;
+  width: calc(100% - 2rem);
+  margin: auto;
+  padding: 1.5rem;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* dialog.showModal() のオーバーレイ（背景） */
+.confirm-modal::backdrop {
+  background: rgba(43, 42, 39, 0.45);
+}
+
+.confirm-modal__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.confirm-modal__message {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.confirm-modal__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.confirm-modal {
+  .btn {
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.55rem 1.15rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  .btn--ghost:hover {
+    background: #fbfaf8;
+  }
+
+  .btn--danger {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  .btn--danger:hover {
+    background: #a5322a;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--read);
+    outline-offset: 2px;
+  }
+}
